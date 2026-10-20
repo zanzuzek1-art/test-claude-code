@@ -2,8 +2,8 @@
 
 Prototip aplikacije, v kateri:
 
-- **gostje** vidijo zasedenost barov in restavracij v živo (koliko mest je prostih) ter si ogledajo digitalni meni,
-- **lokali** sami posodabljajo zasedenost, urejajo digitalni meni in nastavljajo **upsell pravila**.
+- **gostje** vidijo zasedenost lokalov v živo, na tlorisu točno vidijo, katera miza je prosta, jo **rezervirajo** za izbrano uro in si ogledajo digitalni meni,
+- **lokali** na tlorisu postavijo svoje mize (vlečenje), označujejo zasedene mize, potrjujejo rezervacije, urejajo digitalni meni in nastavljajo **upsell pravila**.
 
 ## Upsell
 Lastnik lokala nastavi pravilo, npr. *„če gost vzame ≥ 3× Malvazija – kozarec (1 dl), predlagaj Malvazija – steklenica (7,5 dl)“*.

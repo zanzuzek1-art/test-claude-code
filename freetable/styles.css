@@ -18,6 +18,9 @@
   --toast-bg: #1d1d1f;
   --toast-fg: #ffffff;
   --shadow: rgba(0,0,0,.12);
+  --floor: #ece9e1;
+  --floor-line: #dcd8cd;
+  --reserved: #3b6fd8;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
@@ -25,6 +28,7 @@
     --accent: #5fbf8c; --accent-soft: #1f3529; --free: #4cc27d; --busy: #f0b13f; --full: #f06a5d;
     --field: #252927; --on-accent: #0f1a14; --hint-bg: #2c2618; --hint-border: #5a4a22; --hint-line: #43391f;
     --toast-bg: #ecebe7; --toast-fg: #141615; --shadow: rgba(0,0,0,.5);
+    --floor: #191c1b; --floor-line: #2a2e2c; --reserved: #6f9bf0;
     color-scheme: dark;
   }
 }
@@ -33,6 +37,7 @@
   --accent: #5fbf8c; --accent-soft: #1f3529; --free: #4cc27d; --busy: #f0b13f; --full: #f06a5d;
   --field: #252927; --on-accent: #0f1a14; --hint-bg: #2c2618; --hint-border: #5a4a22; --hint-line: #43391f;
   --toast-bg: #ecebe7; --toast-fg: #141615; --shadow: rgba(0,0,0,.5);
+    --floor: #191c1b; --floor-line: #2a2e2c; --reserved: #6f9bf0;
   color-scheme: dark;
 }
 
@@ -192,6 +197,89 @@ input, select { font: inherit; padding: 6px 8px; border: 1px solid var(--border)
   background: var(--toast-bg); color: var(--toast-fg); padding: 10px 18px; border-radius: 999px; z-index: 50;
 }
 .hidden { display: none !important; }
+
+.btn.ghost { background: var(--accent-soft); color: var(--accent); }
+.venue-actions { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.section-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+.section-head h2 { margin-bottom: 4px; }
+button:focus-visible, select:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+.tabs button {
+  border: 0; background: none; font: inherit; padding: 10px 14px; cursor: pointer; color: var(--muted);
+  border-bottom: 2px solid transparent; margin-bottom: -1px;
+}
+.tabs button.active { color: var(--text); font-weight: 600; border-bottom-color: var(--accent); }
+
+/* rezervacija */
+.booking-controls { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.booking-controls .field { margin-top: 0; font-size: .9rem; color: var(--muted); }
+.booking-controls select { color: var(--text); font-size: 1rem; }
+.hint { font-weight: 600; margin: 12px 0; }
+.reserve .field { font-size: .9rem; color: var(--muted); }
+.reserve input { color: var(--text); font-size: 1rem; }
+.reserve .venue-actions { margin-top: 14px; }
+.confirm { text-align: center; }
+.confirm .venue-actions { justify-content: center; }
+.confirm-icon {
+  width: 52px; height: 52px; margin: 4px auto 8px; border-radius: 50%;
+  background: var(--free); color: var(--on-accent); font-size: 1.6rem; display: grid; place-items: center;
+}
+
+/* tloris */
+.floor {
+  position: relative; width: 100%; aspect-ratio: 4 / 3; border-radius: 12px; overflow: hidden;
+  background-color: var(--floor);
+  background-image: linear-gradient(var(--floor-line) 1px, transparent 1px), linear-gradient(90deg, var(--floor-line) 1px, transparent 1px);
+  background-size: 8.33% 11.11%;
+  border: 1px solid var(--border);
+}
+.feature {
+  position: absolute; transform: translate(-50%, -50%); display: grid; place-items: center;
+  border: 1px dashed var(--muted); border-radius: 6px; color: var(--muted);
+  font-size: .68rem; text-transform: uppercase; letter-spacing: .06em; pointer-events: none;
+}
+.table {
+  position: absolute; transform: translate(-50%, -50%);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px;
+  border: 2px solid transparent; border-radius: 8px; padding: 0; font: inherit; line-height: 1.05;
+  color: var(--on-accent); cursor: default; transition: transform .12s, box-shadow .12s;
+  max-width: 100%; min-height: 0; overflow: hidden;
+}
+.table.round { border-radius: 50%; }
+.table.free { background: var(--free); }
+.table.reserved { background: var(--reserved); }
+.table.occupied { background: var(--full); opacity: .85; }
+.table.dim { background: var(--floor-line); color: var(--muted); opacity: 1; }
+.table.pickable, .floor.owner .table { cursor: pointer; }
+.table.pickable:hover { transform: translate(-50%, -50%) scale(1.08); }
+.table.selected { border-color: var(--text); box-shadow: 0 0 0 4px var(--accent-soft); transform: translate(-50%, -50%) scale(1.08); }
+.floor.owner .table { touch-action: none; }
+.t-label { font-weight: 800; font-size: clamp(.7rem, 2.6vw, 1rem); }
+.t-seats { font-size: clamp(.55rem, 1.8vw, .72rem); opacity: .9; }
+.t-time { font-size: clamp(.55rem, 1.8vw, .7rem); font-weight: 700; }
+.legend { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 8px; font-size: .82rem; color: var(--muted); }
+.dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 5px; vertical-align: -1px; }
+.dot.free { background: var(--free); }
+.dot.reserved { background: var(--reserved); }
+.dot.occupied { background: var(--full); }
+.dot.dim { background: var(--floor-line); border: 1px solid var(--muted); }
+
+/* lastnik: miza in rezervacije */
+.table-panel { margin-top: 12px; padding: 12px; border: 1px solid var(--border); border-radius: 12px; background: var(--bg); }
+.table-panel .field { margin-top: 0; font-size: .85rem; color: var(--muted); flex: 1 1 100px; }
+.table-panel input { color: var(--text); flex: none; }
+.status-toggle { display: inline-flex; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-top: 8px; }
+.status-toggle button { border: 0; background: var(--card); color: var(--text); font: inherit; padding: 8px 16px; cursor: pointer; }
+.status-toggle button.active.free { background: var(--free); color: var(--on-accent); }
+.status-toggle button.active.occupied { background: var(--full); color: var(--on-accent); }
+.res-list { list-style: none; margin: 0; padding: 0; }
+.res-list li { display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--border); }
+.res-list li:last-child { border-bottom: 0; }
+.res-time { font-weight: 800; font-variant-numeric: tabular-nums; color: var(--reserved); min-width: 3em; }
+.res-actions { margin-left: auto; display: flex; gap: 8px; align-items: center; }
+
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 
 @media (max-width: 560px) {
   .owner-table thead { display: none; }
