@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FreeTable – prosta mesta in digitalni meni</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand" data-nav="guest">Free<span>Table</span></div>
+    <nav class="mode-switch">
+      <button data-nav="guest" class="active">Za goste</button>
+      <button data-nav="owner">Za lokale</button>
+    </nav>
+  </header>
+
+  <main id="app"></main>
+
+  <!-- Košarica (samo v pogledu menija) -->
+  <aside id="cart" class="cart hidden">
+    <div class="cart-head">
+      <strong>Vaše naročilo</strong>
+      <button id="cart-toggle" class="link">skrij</button>
+    </div>
+    <div id="cart-body"></div>
+  </aside>
+
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
