@@ -9,6 +9,7 @@ Prototip aplikacije, v kateri:
 Lastnik lokala nastavi pravilo, npr. *„če gost vzame ≥ 3× Malvazija – kozarec (1 dl), predlagaj Malvazija – steklenica (7,5 dl)“*.
 Ko gost v košarico doda 3 kozarce, se mu prikaže namig s primerjavo **cene na dl** (3,20 €/dl proti 2,40 €/dl → 25 % ceneje)
 in gumb, ki kozarce zamenja za steklenico.
+Gost vidi **največ en predlog na naročilo** – če se sproži več pravil, dobi tistega, pri katerem največ pridobi.
 
 ## Zagon
 Odpri `index.html` v brskalniku – strežnik ni potreben. Podatki se shranjujejo v `localStorage`
